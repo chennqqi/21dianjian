@@ -1,0 +1,11 @@
+
+.normal {
+  font-size: 14px;
+}
+.infoRow{
+  margin: 1em;
+}
+
+.infoCol {
+  text-align: right;
+}
