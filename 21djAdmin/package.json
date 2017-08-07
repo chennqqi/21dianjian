@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "./node_modules/.bin/nodemon index.js",
+        "prod": "NODE_ENV=production pm2 start index.js --name 21dj-admin",
         "test": "ava --verbose"
     },
     "author": "",
