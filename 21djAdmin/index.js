@@ -6,6 +6,9 @@ const models = require('./app/models')
 const Umzug = require('umzug');
 const koaBody = require('koa-body')
 const jwt = require('koa-jwt')
+const path = require('path')
+const static = require('koa-static')
+
 
 //数据库表的校验
 var umzug = new Umzug({
@@ -28,6 +31,13 @@ umzug.up().then(function(migrations) {
 }).catch(error => {
     console.log(error)
 })
+
+// 静态资源目录对于相对入口文件index.js的路径
+const staticPath = './static'
+
+app.use(static(
+    path.join(__dirname, staticPath)
+))
 
 // Custom 401 handling if you don't want to expose koa-jwt errors to users
 app.use(function(ctx, next) {
