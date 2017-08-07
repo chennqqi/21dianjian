@@ -41,7 +41,7 @@ app.use(function(ctx, next) {
     });
 });
 
-app.use(jwt({ secret: 'shared-secret' }).unless({ path: [/^\/admin|\/api\/test/] }));
+app.use(jwt({ secret: 'shared-secret' }).unless({ path: [/^\/admin|\/api\/test|\/wxapi|\//] }));
 
 // 使用ctx.body解析中间件
 app.use(koaBody());
