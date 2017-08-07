@@ -18,6 +18,18 @@ const wxApi = {
         ctx.redirect(authUrl);
     },
 
+    async getWxUserInfo(ctx, access_token, openid, redirect_url) {
+        const url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + access_token + '&openid=' + openid + '&lang=zh_CN'
+        const fetchResult = await fetch(url);
+        const result = await fetchResult.json()
+        if (result.errcode) {
+            ctx.body = JSON.stringify(result);
+        } else {
+            //获得个人信息，根据openid查询是否有该用户，如果有，返回userId, 如果没有，则插入数据
+            ctx.body = JSON.stringify(result);
+        }
+    },
+
     async authRedirect(ctx) {
         const code = ctx.query.code;
         const state = ctx.query.state;
@@ -28,30 +40,17 @@ const wxApi = {
         const result = await fetchResult.json()
 
         if (result.errcode) {
+
             ctx.body = JSON.stringify(result);
         } else {
             //获得 access_token
             const access_token = result.access_token
             const openid = result.openid
-            this.getWxUserInfo(access_token, openid, state)
+            wxApi.getWxUserInfo(ctx, '11', 'openid', 'state')
         }
     },
 
-    async getWxUserInfo(access_token, openid, redirect_url) {
 
-        const url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + access_token + '&openid=' + openid + '&lang=zh_CN'
-        const fetchResult = await fetch(url);
-        const result = await fetchResult.json()
-        if (result.errcode) {
-            ctx.body = JSON.stringify(result);
-        } else {
-            //获得个人信息，根据openid查询是否有该用户，如果有，返回userId, 如果没有，则插入数据
-            ctx.body = JSON.stringify(result);
-        }
-
-
-
-    }
 }
 
 module.exports = wxApi
