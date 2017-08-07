@@ -34,7 +34,6 @@ umzug.up().then(function(migrations) {
 
 // 静态资源目录对于相对入口文件index.js的路径
 const staticPath = './static'
-
 app.use(static(
     path.join(__dirname, staticPath)
 ))
