@@ -23,6 +23,7 @@ const wxApi = {
         const url = 'https://api.weixin.qq.com/sns/userinfo?access_token=' + access_token + '&openid=' + openid + '&lang=zh_CN'
         const fetchResult = await fetch(url);
         const result = await fetchResult.json()
+        console.log("result.." + JSON.stringify(result))
         if (result.errcode) {
             ctx.body = JSON.stringify(result);
         } else {
