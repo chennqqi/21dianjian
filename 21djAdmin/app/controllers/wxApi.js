@@ -25,10 +25,10 @@ const wxApi = {
         const result = await fetchResult.json()
         console.log("result.." + JSON.stringify(result))
         if (result.errcode) {
-            ctx.body = JSON.stringify(result);
+            ctx.body = await JSON.stringify(result);
         } else {
             //获得个人信息，根据openid查询是否有该用户，如果有，返回userId, 如果没有，则插入数据
-            ctx.body = JSON.stringify(result);
+            ctx.body = await JSON.stringify(result);
         }
     },
 
@@ -42,7 +42,6 @@ const wxApi = {
         const result = await fetchResult.json()
 
         if (result.errcode) {
-
             ctx.body = JSON.stringify(result);
         } else {
             //获得 access_token
